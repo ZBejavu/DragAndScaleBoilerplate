@@ -3,12 +3,7 @@ const main = document.getElementById('main');
 const header = document.getElementById('header');
 const playground = document.getElementById('playground');
 const playgroundRect = playground.getBoundingClientRect();
-// header.addEventListener('mousedown', );
 console.log(header)
-
-// function handleDown(e){
-//     console.log(e.target);
-// }
 dragElement(main)
 
 
@@ -37,7 +32,6 @@ function dragElement(elmnt) {
     // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
     elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-    //console.log(playground.getBoundingClientRect())
     
     if (elmnt.offsetTop < playgroundRect.top) {
         elmnt.style.top = playgroundRect.top + "px";
@@ -60,9 +54,6 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
-
-
-
 
 function makeResizableDiv(div) {
     const resizers = document.querySelectorAll('#main' + ' .resizer');
@@ -91,6 +82,7 @@ function makeResizableDiv(div) {
           original_mouse_y = e.pageY;
           window.addEventListener('mousemove', resize)
           window.addEventListener('mouseup', stopResize)
+          
       })
       
       function resize(e) {
@@ -172,23 +164,25 @@ function makeResizableDiv(div) {
 
           if (main.offsetTop  < playgroundRect.top) {
              main.style.top = Math.ceil(playgroundRect.top) + "px";
+             stopResize()
           }
           if (main.offsetTop + main.offsetHeight > playgroundRect.bottom) {
              main.style.top = Math.floor(playgroundRect.bottom - main.offsetHeight) + "px";
+             stopResize()
           }
           if (main.offsetLeft < playgroundRect.left) {
              main.style.left = Math.ceil(playgroundRect.left) + "px";
+             stopResize()
           }
           if (main.offsetLeft + main.offsetWidth > playgroundRect.right) {
              main.style.left = Math.floor(playgroundRect.right - main.offsetWidth) + "px";
+             stopResize()
           }
           
       }
       function stopResize() {
         window.removeEventListener('mousemove', resize)
       }
-
-      
     }
   }
   
